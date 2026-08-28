@@ -1,0 +1,634 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================
+   THEME VARIABLES
+========================= */
+
+:root {
+  --bg-color: #f5f7fb;
+  --text-color: #1f2937;
+  --card-color: #ffffff;
+  --border-color: #e5e7eb;
+  --input-bg: #ffffff;
+  --secondary-text: #6b7280;
+  --nav-link-color: #4b5563;
+  --hover-color: #111827;
+  --button-secondary-bg: #ffffff;
+  --button-secondary-border: #d1d5db;
+  --table-border: #e5e7eb;
+}
+
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f3f4f6;
+  --card-color: #1e1e1e;
+  --border-color: #333333;
+  --input-bg: #2a2a2a;
+  --secondary-text: #a1a1aa;
+  --nav-link-color: #d1d5db;
+  --hover-color: #ffffff;
+  --button-secondary-bg: #2a2a2a;
+  --button-secondary-border: #444444;
+  --table-border: #333333;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+
+button {
+  cursor: pointer;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--card-color);
+  color: var(--text-color);
+
+  border-bottom: 1px solid var(--border-color);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+
+.nav-links a {
+  color: var(--nav-link-color);
+  transition: color 0.2s ease;
+}
+
+
+.nav-links a:hover {
+  color: var(--hover-color);
+}
+
+
+.theme-btn {
+  border: none;
+
+  background: var(--input-bg);
+  color: var(--text-color);
+
+  padding: 10px 14px;
+  border-radius: 8px;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+
+.theme-btn:hover {
+  opacity: 0.8;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-btn {
+  border: none;
+  background: #2563eb;
+  color: white;
+
+  padding: 12px 20px;
+  border-radius: 8px;
+
+  font-weight: 600;
+}
+
+
+.secondary-btn {
+  border: 1px solid var(--button-secondary-border);
+
+  background: var(--button-secondary-bg);
+  color: var(--text-color);
+
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  padding: 7px 12px;
+  border-radius: 6px;
+  margin-right: 6px;
+}
+
+
+.edit-btn {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+
+.delete-btn {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+
+/* =========================
+   LANDING
+========================= */
+
+.landing-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+
+.landing-header {
+  height: 70px;
+  padding: 0 7%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: var(--card-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+
+.hero {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 40px 20px;
+}
+
+
+.hero-content {
+  max-width: 700px;
+}
+
+
+.hero h1 {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+
+.hero h1 span {
+  color: #2563eb;
+}
+
+
+.hero p {
+  color: var(--secondary-text);
+
+  font-size: 18px;
+  line-height: 1.7;
+
+  margin-bottom: 30px;
+}
+
+
+footer {
+  text-align: center;
+
+  padding: 25px;
+
+  color: var(--secondary-text);
+}
+
+
+/* =========================
+   PAGES
+========================= */
+
+.dashboard,
+.form-page,
+.history-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+
+  color: var(--text-color);
+}
+
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 30px;
+}
+
+
+.page-header h1 {
+  margin-bottom: 8px;
+}
+
+
+.page-header p {
+  color: var(--secondary-text);
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-cards {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+}
+
+
+.dashboard-card {
+  background: var(--card-color);
+
+  padding: 25px;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border-color);
+
+  color: var(--text-color);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+.dashboard-card p {
+  color: var(--secondary-text);
+  margin-bottom: 10px;
+}
+
+
+.dashboard-card h2 {
+  font-size: 28px;
+}
+
+
+/* =========================
+   ADD FUNDS
+========================= */
+
+.add-funds,
+.recent-expenses {
+  margin-top: 30px;
+
+  background: var(--card-color);
+
+  padding: 25px;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border-color);
+
+  color: var(--text-color);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+.fund-form {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+
+.fund-form input {
+  flex: 1;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+.expense-form {
+  background: var(--card-color);
+
+  padding: 30px;
+
+  border-radius: 12px;
+
+  max-width: 700px;
+
+  border: 1px solid var(--border-color);
+
+  color: var(--text-color);
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-weight: 600;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.filters input,
+.filters select {
+  width: 100%;
+
+  padding: 12px;
+
+  background: var(--input-bg);
+
+  color: var(--text-color);
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus,
+.filters input:focus,
+.filters select:focus {
+  border-color: #2563eb;
+}
+
+
+.form-group textarea {
+  min-height: 120px;
+
+  resize: vertical;
+}
+
+
+.form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+}
+
+
+.error-message {
+  background: #fee2e2;
+
+  color: #b91c1c;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   RECENT EXPENSES
+========================= */
+
+.section-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+
+.section-header a {
+  color: #2563eb;
+}
+
+
+.expense-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 18px 0;
+
+  border-bottom: 1px solid var(--border-color);
+}
+
+
+.expense-row p {
+  color: var(--secondary-text);
+
+  margin-top: 5px;
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters {
+  display: grid;
+
+  grid-template-columns: 1fr 200px;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.expense-table-wrapper {
+  overflow-x: auto;
+
+  background: var(--card-color);
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border-color);
+
+  color: var(--text-color);
+}
+
+
+.expense-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  background: var(--card-color);
+
+  color: var(--text-color);
+}
+
+
+.expense-table th,
+.expense-table td {
+  padding: 15px;
+
+  text-align: left;
+
+  border-bottom: 1px solid var(--table-border);
+}
+
+
+.expense-table th {
+  color: var(--text-color);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+  .dashboard-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  .nav-links {
+    gap: 10px;
+  }
+
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+
+  .nav-links {
+    display: none;
+  }
+
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+
+  .page-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fund-form {
+    flex-direction: column;
+  }
+
+}
