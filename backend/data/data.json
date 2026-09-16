@@ -1,5 +1,5 @@
 {
-  "funds": 30700.0,
+  "funds": 32000.0,
   "expenses": [
     {
       "id": "EXP-001",
@@ -26,6 +26,15 @@
       "category": "Food",
       "date": "2026-08-28",
       "payment_method": "UPI",
+      "description": ""
+    },
+    {
+      "id": "EXP-004",
+      "name": "Lunch",
+      "amount": 100.0,
+      "category": "Food",
+      "date": "2026-09-15",
+      "payment_method": "Cash",
       "description": ""
     }
   ]
