@@ -25,6 +25,28 @@ frontend/dist/
 .DS_Store
 Thumbs.db
 
+# Python testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment variables
+.env.*
+!.env.example
+
+# Local application data
+backend/data/expenses.csv
+backend/data/funds.json
+
+# Temporary files
+*.swp
+*.swo
+
+backend/data/data.json
+
+
+
+
 
 
 
