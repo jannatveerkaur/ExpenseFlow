@@ -1,4 +1,3 @@
-
 import csv
 import io
 from datetime import date
@@ -58,6 +57,7 @@ app.add_middleware(
         "https://expense-flow-rust-three.vercel.app",
         "https://expense-flow-artt.vercel.app",
         "https://expense-flow-artt-git-main-jannatveer-kaurs-projects.vercel.app",
+        "https://expense-flow-mocha.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],

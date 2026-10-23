@@ -1,4 +1,3 @@
-
 import csv
 import json
 from pathlib import Path
@@ -67,7 +66,7 @@ def read_expenses_csv():
 
             try:
                 amount = float(amount_value)
-            except ValueError as exc:
+            except (ValueError, TypeError) as exc:
                 raise ValueError(
                     f"Invalid expense amount: {amount_value}"
                 ) from exc
@@ -113,7 +112,7 @@ def migrate_json_to_csv():
     """Import existing JSON expenses when CSV does not exist."""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Do not overwrite an existing CSV.
+    # Never overwrite an existing CSV.
     if EXPENSES_FILE.exists():
         return
 
@@ -128,27 +127,49 @@ def migrate_json_to_csv():
     write_expenses_csv(expenses)
 
 
+def read_funds():
+    """Read funds safely from funds.json or migrate the old balance."""
+    funds = 0.0
+
+    if FUNDS_FILE.exists():
+        try:
+            with open(FUNDS_FILE, "r", encoding="utf-8") as file:
+                funds = json.load(file)
+        except (json.JSONDecodeError, OSError):
+            funds = 0.0
+
+    elif DATA_FILE.exists():
+        # Preserve funds from the original JSON file when available.
+        with open(DATA_FILE, "r", encoding="utf-8") as file:
+            old_data = json.load(file)
+
+        funds = old_data.get("funds", 0.0)
+
+    # A list or object is not a valid numeric balance.
+    # Normalize it to zero instead of crashing the dashboard.
+    if isinstance(funds, (list, dict, bool)) or funds is None:
+        funds = 0.0
+
+    try:
+        funds = float(funds)
+    except (ValueError, TypeError):
+        funds = 0.0
+
+    # Persist the normalized value so subsequent reads remain valid.
+    write_funds(funds)
+
+    return funds
+
+
 def read_data():
     """Return expenses and funds in the existing data structure."""
     migrate_json_to_csv()
 
-    if FUNDS_FILE.exists():
-        with open(FUNDS_FILE, "r", encoding="utf-8") as file:
-            funds = json.load(file)
-    else:
-        funds = []
-
-        # Preserve funds from the original JSON file.
-        if DATA_FILE.exists():
-            with open(DATA_FILE, "r", encoding="utf-8") as file:
-                old_data = json.load(file)
-
-            funds = old_data.get("funds", [])
-
-        write_funds(funds)
+    funds = read_funds()
+    expenses = read_expenses_csv()
 
     return {
-        "expenses": read_expenses_csv(),
+        "expenses": expenses,
         "funds": funds,
     }
 
@@ -157,6 +178,14 @@ def write_funds(funds):
     """Persist funds separately from expense records."""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
+    if isinstance(funds, (list, dict, bool)) or funds is None:
+        funds = 0.0
+
+    try:
+        funds = float(funds)
+    except (ValueError, TypeError):
+        funds = 0.0
+
     with open(FUNDS_FILE, "w", encoding="utf-8") as file:
         json.dump(funds, file, indent=2)
 
@@ -164,7 +193,7 @@ def write_funds(funds):
 def write_data(data):
     """Persist expenses to CSV and funds to JSON."""
     write_expenses_csv(data.get("expenses", []))
-    write_funds(data.get("funds", []))
+    write_funds(data.get("funds", 0.0))
 
 
 def get_next_expense_id(expenses):
@@ -243,4 +272,3 @@ def delete_expense(expense_id):
             return True
 
     return False
-
