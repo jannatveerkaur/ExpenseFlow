@@ -55,6 +55,9 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://expense-flow-rust-three.vercel.app",
+        "https://expense-flow-artt.vercel.app",
+        "https://expense-flow-artt-git-main-jannatveer-kaurs-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -364,4 +367,3 @@ def export_expenses():
             status_code=500,
             detail=f"Unable to export expenses: {exc}",
         ) from exc
-
